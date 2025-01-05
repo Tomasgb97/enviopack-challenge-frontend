@@ -7,7 +7,7 @@ Para correr el proyecto clonarlo ya ejecutar : npm install && npm run dev.
 - React
 - React DOM
 - React Router DOM V6
-- Axios
+- Fetch
 - ESlint
 - Context API
 - Prettier
