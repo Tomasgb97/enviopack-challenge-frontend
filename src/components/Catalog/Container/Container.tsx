@@ -5,6 +5,8 @@ import { Product } from '../../../types/product';
 import CatalogItem from '../Catalog-item/CatalogItem';
 import debounce from 'debounce';
 import { isMatch } from '../../../utils/isProdMatch';
+import { SortEnum } from '../../../types/sortEnum';
+import { sortProducts } from '../../../utils/sortProducts';
 
 const Container = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -15,7 +17,7 @@ const Container = () => {
     const fetchProducts = async () => {
       try {
         const data = await GetProducts();
-        setProducts(data);
+        setProducts(sortProducts(data, SortEnum.ASCENDING));
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (e) {
         setError('Failed to load products');
@@ -28,10 +30,7 @@ const Container = () => {
 
   const FilteredProducts = useMemo(() => {
     return products.filter((prod) => isMatch(prod.title, search));
-  }, [search]);
-
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>{error}</div>;
+  }, [search, products]);
 
   const filteredResult = (items: Product[]) => {
     if (items.length > 1) {
@@ -52,9 +51,22 @@ const Container = () => {
       );
   };
 
+  const handleSort = (e: SortEnum) => {
+    const sortedProducts = sortProducts(products, e);
+    setProducts(sortedProducts);
+  };
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>{error}</div>;
+
   return (
     <div className="w-full flex-col">
-      <CatalogFilters onSearchChange={debounce((e) => setSearch(e), 1500)} />
+      <CatalogFilters
+        onSortChange={(e) => {
+          handleSort(e);
+        }}
+        onSearchChange={debounce((e) => setSearch(e), 1500)}
+      />
       <div className="w-full min-h-96 grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] place-items-center gap-12">
         {search.length > 0 && filteredResult(FilteredProducts)}
         {search.length == 0 &&

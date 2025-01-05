@@ -9,7 +9,7 @@ type SelectProps = {
   options: Item[];
 } & SelectHTMLAttributes<HTMLSelectElement>;
 
-const Select = ({ label, name, options }: SelectProps) => {
+const Select = ({ label, name, options, onChange }: SelectProps) => {
   return (
     <div className="flex flex-col">
       {label && (
@@ -18,6 +18,7 @@ const Select = ({ label, name, options }: SelectProps) => {
         </label>
       )}
       <select
+        onChange={onChange}
         className=" text-sm font-semibold focus:outline-none border border-gray-400 p-0.5 rounded-md bg-gray-100"
         name={name}
         id={name}
