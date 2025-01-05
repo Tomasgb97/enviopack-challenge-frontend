@@ -1,7 +1,9 @@
 import { useUserProfile } from '../../../contexts/UserContext';
+import { useCartStore } from '../../../stores/cart-store';
 
 const Header = () => {
   const { userProfile } = useUserProfile();
+  const { items } = useCartStore();
 
   const UserData = () => {
     return (
@@ -9,7 +11,7 @@ const Header = () => {
         {userProfile && (
           <span>{userProfile?.firstName + ' ' + userProfile?.lastName}</span>
         )}
-        <span className="font-bold">Carrito(1)</span>
+        <span className="font-bold">Carrito({items.length})</span>
         <span>Crédito ${userProfile?.credit}</span>
       </div>
     );
