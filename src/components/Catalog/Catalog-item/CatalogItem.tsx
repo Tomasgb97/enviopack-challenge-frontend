@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useMemo } from 'react';
+import { useCartStore } from '../../../stores/cart-store';
+import { Product } from '../../../types/product';
+import Button from '../../Common/Button';
 
 interface CatalogItemProps {
   image: string;
   title: string;
   price: number;
   discount: number;
+  id: string;
   onAddToCart: () => void;
+  onSeeCart: () => void;
 }
 
 const CatalogItem: React.FC<CatalogItemProps> = ({
@@ -13,8 +18,16 @@ const CatalogItem: React.FC<CatalogItemProps> = ({
   title,
   price,
   discount,
+  id,
   onAddToCart,
+  onSeeCart,
 }) => {
+  const { items } = useCartStore();
+
+  const isOnCart = useMemo(
+    () => items.some((item: Product) => item.id === id),
+    [items, id]
+  );
   return (
     <div className="max-w-sm rounded-md overflow-hidden shadow-md shadow-slate-500 p-4">
       <img
@@ -38,12 +51,19 @@ const CatalogItem: React.FC<CatalogItemProps> = ({
         </div>
       </div>
       <div className="px-6 pt-4 pb-2">
-        <button
-          className="w-full bg-black hover:bg-gray-900 text-white font-bold py-2 px-4 rounded"
-          onClick={onAddToCart}
-        >
-          Add to Cart
-        </button>
+        {!isOnCart ? (
+          <Button
+            variant="Add"
+            text="Agergar al carrito"
+            onClick={onAddToCart}
+          ></Button>
+        ) : (
+          <Button
+            variant="Check"
+            text="Ver carrito"
+            onClick={onSeeCart}
+          ></Button>
+        )}
       </div>
     </div>
   );
