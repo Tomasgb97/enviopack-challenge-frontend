@@ -1,11 +1,15 @@
-import { useNavigate } from 'react-router-dom';
 import { useUserProfile } from '../../../contexts/UserContext';
 import { useCartStore } from '../../../stores/cart-store';
+import { Popover } from 'react-tiny-popover';
+import CartMenu from './CartMenu';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const { userProfile } = useUserProfile();
   const { items } = useCartStore();
   const navigate = useNavigate();
+  const [popOverVisible, setPopOverVisible] = useState(false);
 
   const UserData = () => {
     return (
@@ -13,12 +17,21 @@ const Header = () => {
         {userProfile && (
           <span>{userProfile?.firstName + ' ' + userProfile?.lastName}</span>
         )}
-        <span
-          onClick={() => navigate('/cart')}
-          className="font-bold cursor-pointer"
+        <Popover
+          content={<CartMenu />}
+          positions={'bottom'}
+          padding={5}
+          align="center"
+          isOpen={popOverVisible}
         >
-          Carrito({items.length})
-        </span>
+          <span
+            onClick={() => setPopOverVisible((state) => !state)}
+            className="font-bold cursor-pointer select-none"
+          >
+            Carrito({items.length})
+          </span>
+        </Popover>
+
         <span>Crédito ${userProfile?.credit}</span>
       </div>
     );

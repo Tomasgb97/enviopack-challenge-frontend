@@ -6,6 +6,7 @@ interface CartStore {
   items: Product[];
   addItem: (item: Product) => void;
   removeItem: (id: string) => void;
+  clearCart: () => void;
 }
 
 export const useCartStore = create(
@@ -25,6 +26,11 @@ export const useCartStore = create(
 
           return { items: [...state.items, product] };
         }),
+      clearCart: () => {
+        set(() => {
+          return { items: [] };
+        });
+      },
     }),
     { name: 'product-items-ids' }
   )
