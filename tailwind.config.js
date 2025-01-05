@@ -8,6 +8,7 @@ export default {
       },
       maxWidth: {
         'container-max': '1280px',
+        'checkout-max': '764px',
       },
     },
   },

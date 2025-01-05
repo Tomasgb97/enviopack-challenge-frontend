@@ -5,13 +5,14 @@ import { useMemo } from 'react';
 import Catalog from './routes/Catalog/Catalog';
 import { UserProfileProvider } from './contexts/UserContext';
 import Cart from './routes/Cart/Cart';
+import Checkout from './routes/Checkout/Checkout';
 
 function App() {
   const PublicRoutes = useMemo(() => {
     return [
       { path: '/', component: <Catalog /> },
       { path: '/cart', component: <Cart /> },
-      { path: '/checkout', component: <></> },
+      { path: '/checkout', component: <Checkout /> },
     ];
   }, []);
 
