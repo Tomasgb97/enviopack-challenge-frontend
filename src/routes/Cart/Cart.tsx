@@ -55,7 +55,7 @@ const Cart = () => {
             className="max-w-fit"
             text="Finalizar compra"
             variant="Add"
-            onClick={() => handleCheckout}
+            onClick={() => handleCheckout()}
           ></Button>
         </div>
       </div>
