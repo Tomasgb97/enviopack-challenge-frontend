@@ -33,23 +33,31 @@ const Container = () => {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
 
+  const filteredResult = (items: Product[]) => {
+    if (items.length > 1) {
+      return items.map((prod) => {
+        return (
+          <CatalogItem
+            onAddToCart={() => {}}
+            key={prod.id}
+            image={'/images/image-product.jpg'}
+            price={prod.price}
+            title={prod.title}
+          />
+        );
+      });
+    } else
+      return (
+        <h1 className="lg:col-start-2">No hay resultados para esta busqueda</h1>
+      );
+  };
+
   return (
     <div className="w-full flex-col">
       <CatalogFilters onSearchChange={debounce((e) => setSearch(e), 1500)} />
       <div className="w-full min-h-96 grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] place-items-center gap-12">
-        {FilteredProducts.length > 0 &&
-          FilteredProducts.map((prod) => {
-            return (
-              <CatalogItem
-                onAddToCart={() => {}}
-                key={prod.id}
-                image={'/images/image-product.jpg'}
-                price={prod.price}
-                title={prod.title}
-              />
-            );
-          })}
-        {FilteredProducts.length == 0 &&
+        {search.length > 0 && filteredResult(FilteredProducts)}
+        {search.length == 0 &&
           products.map((prod) => {
             return (
               <CatalogItem
