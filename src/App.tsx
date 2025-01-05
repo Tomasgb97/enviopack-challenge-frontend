@@ -1,25 +1,17 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import Logo from '/Logo.svg';
 import Header from './components/Layout/Header/Header';
 import { useMemo } from 'react';
 import Catalog from './routes/Catalog/Catalog';
 import { UserProfileProvider } from './contexts/UserContext';
+import Cart from './routes/Cart/Cart';
 
 function App() {
-  const Other = () => {
-    return (
-      <div className="w-full flex flex-col justify-center items-center">
-        <h1>Tailwind envioPack</h1>
-        <img src={Logo} alt="" />
-      </div>
-    );
-  };
-
   const PublicRoutes = useMemo(() => {
     return [
       { path: '/', component: <Catalog /> },
-      { path: '/other', component: <Other /> },
+      { path: '/cart', component: <Cart /> },
+      { path: '/checkout', component: <></> },
     ];
   }, []);
 

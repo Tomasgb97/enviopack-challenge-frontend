@@ -7,12 +7,16 @@ import debounce from 'debounce';
 import { isMatch } from '../../../utils/isProdMatch';
 import { SortEnum } from '../../../types/sortEnum';
 import { sortProducts } from '../../../utils/sortProducts';
+import { useCartStore } from '../../../stores/cart-store';
+import { useNavigate } from 'react-router-dom';
 
 const Container = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [search, setSearch] = useState<string>('');
+  const { addItem } = useCartStore();
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -28,6 +32,10 @@ const Container = () => {
     fetchProducts();
   }, []);
 
+  const handleGoToCart = () => {
+    navigate('/cart');
+  };
+
   const FilteredProducts = useMemo(() => {
     return products.filter((prod) => isMatch(prod.title, search));
   }, [search, products]);
@@ -37,7 +45,11 @@ const Container = () => {
       return items.map((prod) => {
         return (
           <CatalogItem
-            onAddToCart={() => {}}
+            onAddToCart={() => {
+              addItem(prod);
+            }}
+            id={prod.id}
+            onSeeCart={handleGoToCart}
             key={prod.id}
             image={'/images/image-product.jpg'}
             price={prod.price}
@@ -74,7 +86,11 @@ const Container = () => {
           products.map((prod) => {
             return (
               <CatalogItem
-                onAddToCart={() => {}}
+                onAddToCart={() => {
+                  addItem(prod);
+                }}
+                id={prod.id}
+                onSeeCart={handleGoToCart}
                 key={prod.id}
                 image={'/images/image-product.jpg'}
                 price={prod.price}
