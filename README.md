@@ -1,6 +1,6 @@
 # Envio Pack Challenge / Tomas Gomez Belcastro.
 
-To run project clone repo and do : npm install && npm run dev.
+Para correr el proyecto clonarlo ya ejecutar : npm install && npm run dev.
 
 ## Librerías Utilizadas
 
