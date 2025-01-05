@@ -13,6 +13,7 @@ Para correr el proyecto clonarlo ya ejecutar : npm install && npm run dev.
 - Prettier
 - Tailwind
 - React Tiny Popover
+- React Hot Toast
 
 
 -----------------------------------------------

@@ -13,6 +13,7 @@ interface UserProfileContextProps {
   userProfile: Profile | null;
   setUserProfile: (profile: Profile) => void;
   consumeUserCredits: (amount: number) => boolean;
+  AddCreditsToUser: (amount: number) => void;
 }
 
 const UserProfileContext = createContext<UserProfileContextProps | undefined>(
@@ -57,6 +58,16 @@ export const UserProfileProvider: React.FC<{ children: ReactNode }> = ({
     return true;
   };
 
+  const AddCreditsToUser = (amount: number) => {
+    if (userProfile) {
+      const updatedCreditsUser = {
+        ...userProfile,
+        credit: userProfile.credit + amount,
+      };
+      updateUser(updatedCreditsUser);
+    }
+  };
+
   useEffect(() => {
     const userData = localStorage.getItem('user');
     if (userData) {
@@ -69,7 +80,12 @@ export const UserProfileProvider: React.FC<{ children: ReactNode }> = ({
 
   return (
     <UserProfileContext.Provider
-      value={{ userProfile, setUserProfile, consumeUserCredits }}
+      value={{
+        userProfile,
+        setUserProfile,
+        consumeUserCredits,
+        AddCreditsToUser,
+      }}
     >
       {children}
     </UserProfileContext.Provider>
