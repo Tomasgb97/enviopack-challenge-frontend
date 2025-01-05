@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import CatalogFilters from '../Catalog-filters/CatalogFilters';
 import { GetProducts } from '../../../services/products-service';
 import { Product } from '../../../types/product';
+import CatalogItem from '../Catalog-item/CatalogItem';
 
 const Container = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -31,7 +32,15 @@ const Container = () => {
       <CatalogFilters />
       <div className="w-full min-h-96 grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] place-items-center gap-12">
         {products.map((prod) => {
-          return <p key={prod.id}>{prod.title}</p>;
+          return (
+            <CatalogItem
+              onAddToCart={() => {}}
+              key={prod.id}
+              image={'/images/image-product.jpg'}
+              price={prod.price}
+              title={prod.title}
+            />
+          );
         })}
       </div>
     </div>
