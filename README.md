@@ -14,6 +14,7 @@ Para correr el proyecto clonarlo ya ejecutar : npm install && npm run dev.
 - Tailwind
 - React Tiny Popover
 - React Hot Toast
+- debounce
 
 
 -----------------------------------------------
