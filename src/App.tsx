@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Logo from '/Logo.svg';
+import Header from './components/Layout/Header/Header';
 
 function App() {
   const Other = () => {
@@ -12,12 +13,15 @@ function App() {
     );
   };
   return (
-    <>
-      <Routes>
-        <Route path="/" element={<p>HOME</p>}></Route>
-        <Route path="/other" element={<Other />}></Route>
-      </Routes>
-    </>
+    <body className="p-2">
+      <Header />
+      <main className="max-w-container-max m-auto min-h-[90dvh]">
+        <Routes>
+          <Route path="/" element={<p>HOME</p>}></Route>
+          <Route path="/other" element={<Other />}></Route>
+        </Routes>
+      </main>
+    </body>
   );
 }
 
