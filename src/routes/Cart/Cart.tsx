@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { useUserProfile } from '../../contexts/UserContext';
 
 const Cart = () => {
-  const { items } = useCartStore();
+  const { items, clearCart } = useCartStore();
   const { consumeUserCredits } = useUserProfile();
   const navigate = useNavigate();
 
@@ -28,6 +28,7 @@ const Cart = () => {
   const handleCheckout = () => {
     if (consumeUserCredits(total)) {
       navigate('/checkout?success=true');
+      clearCart();
     } else {
       navigate('/checkout?success=false');
     }
@@ -44,20 +45,22 @@ const Cart = () => {
             Te ahorraste $ {totalAhorro} !!
           </span>
         )}
-        <div className="w-full flex justify-between">
-          <Button
-            className="max-w-fit"
-            text="Volveral catálogo"
-            variant="Add"
-            onClick={() => navigate('/')}
-          ></Button>
-          <Button
-            className="max-w-fit"
-            text="Finalizar compra"
-            variant="Add"
-            onClick={() => handleCheckout()}
-          ></Button>
-        </div>
+        {items.length > 0 && (
+          <div className="w-full flex justify-between">
+            <Button
+              className="max-w-fit"
+              text="Volveral catálogo"
+              variant="Add"
+              onClick={() => navigate('/')}
+            ></Button>
+            <Button
+              className="max-w-fit"
+              text="Finalizar compra"
+              variant="Add"
+              onClick={() => handleCheckout()}
+            ></Button>
+          </div>
+        )}
       </div>
     </>
   );
