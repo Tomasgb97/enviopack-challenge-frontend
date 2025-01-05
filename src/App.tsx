@@ -11,6 +11,7 @@ function App() {
     return [
       { path: '/', component: <Catalog /> },
       { path: '/cart', component: <Cart /> },
+      { path: '/checkout', component: <></> },
     ];
   }, []);
 
