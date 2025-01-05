@@ -13,7 +13,7 @@ const CatalogFilters: React.FC<CatalogFiltersProps> = ({
   onSortChange,
 }) => {
   return (
-    <div className="w-full flex justify-between items-end pb-2">
+    <div className="w-full flex justify-between items-end pb-4">
       <div className="sm:min-w-48">
         <Input
           onChange={(e) => {

@@ -41,6 +41,7 @@ const Container = () => {
             key={prod.id}
             image={'/images/image-product.jpg'}
             price={prod.price}
+            discount={prod.discount}
             title={prod.title}
           />
         );
@@ -77,6 +78,7 @@ const Container = () => {
                 key={prod.id}
                 image={'/images/image-product.jpg'}
                 price={prod.price}
+                discount={prod.discount}
                 title={prod.title}
               />
             );
