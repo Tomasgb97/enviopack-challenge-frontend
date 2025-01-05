@@ -2,6 +2,19 @@
 
 To run project clone repo and do : npm install && npm run dev.
 
+## Librerías Utilizadas
+
+- React
+- React DOM
+- React Router DOM V6
+- Axios
+- ESlint
+- Context API
+- Prettier
+- Tailwind
+- React Tiny Popover
+
+
 -----------------------------------------------
 
 # Objetivo
