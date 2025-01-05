@@ -2,11 +2,16 @@ import Input from '../../Common/Input';
 import Select from '../../Common/Select';
 import { FilterOptions } from '../../../utils/filterOptions';
 import React from 'react';
+import { SortEnum } from '../../../types/sortEnum';
 
 interface CatalogFiltersProps {
   onSearchChange: (e: string) => void;
+  onSortChange: (e: SortEnum) => void;
 }
-const CatalogFilters: React.FC<CatalogFiltersProps> = ({ onSearchChange }) => {
+const CatalogFilters: React.FC<CatalogFiltersProps> = ({
+  onSearchChange,
+  onSortChange,
+}) => {
   return (
     <div className="w-full flex justify-between items-end pb-2">
       <div className="sm:min-w-48">
@@ -20,7 +25,13 @@ const CatalogFilters: React.FC<CatalogFiltersProps> = ({ onSearchChange }) => {
       </div>
 
       <div className="lg:w-[10%]">
-        <Select label="ORDERNAR POR" options={FilterOptions} />
+        <Select
+          onChange={(e) => {
+            onSortChange(e.target.value as SortEnum);
+          }}
+          label="ORDERNAR POR"
+          options={FilterOptions}
+        />
       </div>
     </div>
   );
