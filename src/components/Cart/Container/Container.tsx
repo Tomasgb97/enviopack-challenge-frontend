@@ -22,7 +22,7 @@ const CartContainer: React.FC<ContainerProps> = ({ items }) => {
           <Button
             variant="Add"
             onClick={() => navigate('/')}
-            text="Volver al Carrito"
+            text="Volver al Catálogo"
           ></Button>
         </div>
       )}
