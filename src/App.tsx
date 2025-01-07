@@ -17,7 +17,7 @@ function App() {
   }, []);
 
   return (
-    <body className="p-2">
+    <div className="p-2">
       <UserProfileProvider>
         <Header />
         <main className="max-w-container-max m-auto min-h-[90dvh]">
@@ -34,7 +34,7 @@ function App() {
           </Routes>
         </main>
       </UserProfileProvider>
-    </body>
+    </div>
   );
 }
 
